@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src", //目錄
+    "target": "ES5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "outDir": "dist",
+    "allowJs": true, //允許編譯Javascript文件
+    "checkJs": true, //檢查JS文件   
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true, //允许從没有默然導出的模組進行默認導入
+    "resolveJsonModule": true, //允许使用 .json 導入模組
+    "jsx": "react", //在.tsx文件中支持jsx
+    "sourceMap": true,
+    "declaration": true,
+    "baseUrl": "./",
+    "allowUmdGlobalAccess": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false, //不允許使用隱式Any類型
+    "strictNullChecks": false, //不允许把 null、undefined 赋值给其他类型变量
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
