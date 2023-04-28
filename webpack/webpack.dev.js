@@ -13,6 +13,24 @@ const config = {
     stats: 'errors-only',
     devServer: {
         open: 'chrome'
+    },
+    module: {
+        rules: [
+            {   //打包靜態資源
+                test: /\.(png|jpg|gif|jpeg|webp|svg)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[hash][ext][query]',
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[hash][ext][query]',
+                },
+            }
+        ]
     }
 }
 
