@@ -3,6 +3,7 @@ const path = require('path');
 const variable = require('./webpackUtils/variable');
 const resolveConfig = require('./webpackUtils/resolve');
 const plugins = require('./webpackUtils/plugins');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { SRC_PATH, DIST_PATH, IS_DEV, IS_PRO, getCDNPath } = variable;
 
 const config = {
@@ -31,6 +32,30 @@ const config = {
                     }
                 }],
                 exclude: [/node_modules/, /public/, /(.|_)min\.js$/]
+            },
+            {
+                test: /\.css$|\.scss$/i,
+                include: [SRC_PATH],
+                exclude: /node_modules/,
+                use: [
+                    IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: false,
+                            sourceMap: !IS_PRO
+                        }
+                    },
+                    'postcss-loader',
+                    'sass-loader',
+                    {
+                        //導入css預處理器的一些公共的樣式文件變量
+                        loader: 'style-resources-loader',
+                        options: {
+                            patterns: path.resolve(SRC_PATH, 'assets', 'css', 'core.scss'),
+                        },
+                    }
+                ]
             }
         ]
     },

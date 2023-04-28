@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from 'react-dom';
-
+import './index.scss';
 const rootElement = document.getElementById('root');
 const App = () => {
     function func<T>(a: T): T {
