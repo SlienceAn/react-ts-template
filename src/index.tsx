@@ -8,10 +8,9 @@ const App = () => {
         alert(a)
         return a
     }
-    func<number>(187)
     return (
         <div className="hello">
-            <div>H E L L O</div>
+            <div>HEEEEferferfreff</div>
             <img src={Img}></img>
             <button className="hello" onClick={func}>say hi</button>
         </div>

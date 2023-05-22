@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const variable = require('./webpackUtils/variable');
-
+//引入熱更新
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { DIST_PATH } = variable;
 
 const config = {
@@ -11,9 +12,6 @@ const config = {
     cache: { type: 'memory' },//使用記憶體緩存
     devtool: 'eval-cheap-module-source-map',
     stats: 'errors-only',
-    devServer: {
-        open: 'chrome'
-    },
     module: {
         rules: [
             {   //打包靜態資源
@@ -31,6 +29,30 @@ const config = {
                 },
             }
         ]
+    },
+    devServer: {
+        open: {
+            target: ['index.html'],
+            app: {
+                name: 'chrome',
+            },
+        },
+        compress: true,
+        host: 'localhost',
+        hot: true,
+        port: 8080,
+        client: {
+            logging: "error",
+        },
+        static: {
+            directory: DIST_PATH
+        }
+    },
+    plugins: [new ReactRefreshWebpackPlugin()].filter(Boolean),
+    watchOptions: {
+        aggregateTimeout: 500,
+        poll: 1000,
+        ignored: /node_modules/,
     }
 }
 
